@@ -64,12 +64,44 @@ void Unit::newTurn(){
 }
 
 //Write Function Member attack(), beAttacked(), heal(), guard() and isDead() here
-//
-//
-//
-//
-//
-//
+int Unit::attack(Unit &U){
+	return U.beAttacked(atk);
+}
+int Unit::beAttacked(int ATK){
+	int dmg=ATK-def;
+	if(guard_on==true){
+		dmg=dmg/3;
+	}
+	hp=hp-dmg;
+	return dmg;
+}
+int Unit::heal(){
+	int up;
+	up=rand()%21+10;
+	if(hp+up<=hpmax){
+		hp=hp+up;
+	}
+	else
+	{
+		up=hpmax-hp;
+		hp=hpmax;
+	}
+	return up;
+}
+void Unit::guard(){
+	guard_on = true;
+}
+bool Unit::isDead(){
+	if(hp<=0){
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+	
+}
+
 
 void drawScene(char p_action,int p,char m_action,int m){
 	cout << "                                                       \n";
